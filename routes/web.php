@@ -71,7 +71,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/products', [ProductController::class, 'index']);
     Route::post('/products', [ProductController::class, 'store'])->name('create.product');
     Route::post('/multi-del-products', [ProductController::class, 'multiDdel']);
-
+    Route::post('products/{id}', [ProductController::class, 'update'])->name('update.product');
     Route::post('/del-product/{id}', [ProductController::class, 'destroy']);
 
 
@@ -135,6 +135,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::post('story/{id}', [StoryController::class, 'update'])->name('update.story');
 
+    Route::delete('del-story/{id}', [StoryController::class, 'destroy'])->name('delete.story');
 
 
     Route::post('story-filter-by-category', [StoryController::class, 'filterByCategory'])->name('filter.story.category');
@@ -143,11 +144,15 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::post('story-filter-by-rangeTime', [StoryController::class, 'filterByTime'])->name('filter.story.rangeTime');
 
+    Route::get('/get-stories', [StoryController::class, 'getall'])->name('filter.story');
 
     /// Chapter
 
     Route::get('/chapters/{story_id}', [ChapterController::class, 'create'])->name('story.chapter.create');
     Route::post('/chapter', [ChapterController::class, 'store'])->name('story.chapter.store');
+
+    Route::delete('del-chapter/{id}', [StoryController::class, 'destroy'])->name('story.chapter.delete');
+
 
     // setting page 
 

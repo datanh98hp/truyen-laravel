@@ -94,6 +94,7 @@
                             </button>
                         </div>
                     @endif
+                    
                     <div class="table-responsive table-responsive-data2">
                         <table class="table table-data2 display" id="storysTb">
                             <thead>
@@ -130,7 +131,7 @@
                                         <td>
                                             {{ $story->category->title }}
                                         </td>
-                                        <td>{{ $story->created_at->diffForHumans() }}</td>
+                                        <td>{{ $story->created_at }}</td>
 
                                         <td>
                                             <div class="table-data-feature">
@@ -840,11 +841,11 @@
                 });
 
                 $.ajax({
-                    method: "POST",
+                    method: "DELETE",
                     url: "del-story/" + id,
-                    data: {
-                        id
-                    },
+                    // data: {
+                    //     id
+                    // },
                     dataType: 'text',
                     success: function(result) {
                         console.log("a", result);
@@ -919,38 +920,36 @@
                         var time = convertToTimeStamp(item.created_at);
                         $('#list-storys').append(
                             `
-                             <tr class="tr-shadow py-3">
+                            <tr class="tr-shadow py-3">
                                         <td>
                                             <label class="au-checkbox">
-                                                <input type="checkbox" name="idp" value="{{ $story->id }}">
+                                                <input type="checkbox" name="idp" value="${item.id}">
                                                 <span class="au-checkmark"></span>
                                             </label>
                                         </td>
-                                        <td>{{ $story->title }}</td>
+                                        <td>${item.title}</td>
                                         <td>
-                                            <img src="{{ asset($story->thumImg ?? '/a.jpg') }}"
+                                            <img src="${item.thumImg ?? '/a.jpg' }"
                                                 style="height: 45px;width:60px;">
                                         </td>
                                         <td>
-                                            {{ $story->category->title }}
+                                           ${item.category.title}
                                         </td>
-                                        <td>{{ $story->created_at->diffForHumans() }}</td>
+                                        <td>${item.created_at}</td>
 
                                         <td>
                                             <div class="table-data-feature">
                                                 <button class="item" data-toggle="modal"
-                                                    data-target="#edit{{ $story->id }}">
+                                                    data-target="#edit${item.id}">
                                                     <i class="zmdi zmdi-edit"></i>
                                                 </button>
                                                 <button class="item" data-placement="top"
-                                                    id="btn-del-item{{ $story->id }}"
-                                                    onclick="deleteItem({{ $story->id }})" title="Delete">
+                                                    id="btn-del-item${item.id}"
+                                                    onclick="deleteItem(${item.id})" title="Delete">
                                                     <i class="zmdi zmdi-delete"></i>
                                                 </button>
-
                                             </div>
                                         </td>
-
                                     </tr>
                             `
                         );
@@ -994,39 +993,37 @@
                     list.map(function(item) {
                         var time = convertToTimeStamp(item.created_at);
                         $('#list-storys').append(
-                            `
+                        `
                         <tr class="tr-shadow py-3">
                                         <td>
                                             <label class="au-checkbox">
-                                                <input type="checkbox" name="idp" value="{{ $story->id }}">
+                                                <input type="checkbox" name="idp" value="${item.id}">
                                                 <span class="au-checkmark"></span>
                                             </label>
                                         </td>
-                                        <td>{{ $story->title }}</td>
+                                        <td>${item.title}</td>
                                         <td>
-                                            <img src="{{ asset($story->thumImg ?? '/a.jpg') }}"
+                                            <img src="${item.thumImg ?? '/a.jpg'}"
                                                 style="height: 45px;width:60px;">
                                         </td>
                                         <td>
-                                            {{ $story->category->title }}
+                                           ${item.category.title}
                                         </td>
-                                        <td>{{ $story->created_at->diffForHumans() }}</td>
+                                        <td>${item.created_at}</td>
 
                                         <td>
                                             <div class="table-data-feature">
                                                 <button class="item" data-toggle="modal"
-                                                    data-target="#edit{{ $story->id }}">
+                                                    data-target="#edit${item.id}">
                                                     <i class="zmdi zmdi-edit"></i>
                                                 </button>
                                                 <button class="item" data-placement="top"
-                                                    id="btn-del-item{{ $story->id }}"
-                                                    onclick="deleteItem({{ $story->id }})" title="Delete">
+                                                    id="btn-del-item${item.id}"
+                                                    onclick="deleteItem(${item.id})" title="Delete">
                                                     <i class="zmdi zmdi-delete"></i>
                                                 </button>
-
                                             </div>
                                         </td>
-
                                     </tr>
                             `
                         );
@@ -1043,7 +1040,7 @@
             //alert('iahdihd');
 
             //
-            let startDate = $('#startDate').val();
+            let startDate = $('#startDate').val(); 
             let endDate = $('#endDate').val();
 
             if (startDate == null || endDate == null) {
@@ -1084,38 +1081,36 @@
                         var time = convertToTimeStamp(item.created_at);
                         $('#list-storys').append(
                             `
-                    <tr class="tr-shadow py-3">
+                     <tr class="tr-shadow py-3">
                                         <td>
                                             <label class="au-checkbox">
-                                                <input type="checkbox" name="idp" value="{{ $story->id }}">
+                                                <input type="checkbox" name="idp" value="${item.id}">
                                                 <span class="au-checkmark"></span>
                                             </label>
                                         </td>
-                                        <td>{{ $story->title }}</td>
+                                        <td>${item.title}</td>
                                         <td>
-                                            <img src="{{ asset($story->thumImg ?? '/a.jpg') }}"
+                                            <img src="${item.thumImg ?? '/a.jpg'}"
                                                 style="height: 45px;width:60px;">
                                         </td>
                                         <td>
-                                            {{ $story->category->title }}
+                                           ${item.category.title}
                                         </td>
-                                        <td>{{ $story->created_at->diffForHumans() }}</td>
+                                        <td>${item.created_at}</td>
 
                                         <td>
                                             <div class="table-data-feature">
                                                 <button class="item" data-toggle="modal"
-                                                    data-target="#edit{{ $story->id }}">
+                                                    data-target="#edit${item.id}">
                                                     <i class="zmdi zmdi-edit"></i>
                                                 </button>
                                                 <button class="item" data-placement="top"
-                                                    id="btn-del-item{{ $story->id }}"
-                                                    onclick="deleteItem({{ $story->id }})" title="Delete">
+                                                    id="btn-del-item${item.id}"
+                                                    onclick="deleteItem(${item.id})" title="Delete">
                                                     <i class="zmdi zmdi-delete"></i>
                                                 </button>
-
                                             </div>
                                         </td>
-
                                     </tr>
                             `
                         );
@@ -1150,49 +1145,40 @@
                     let list = data.result;
                     console.log(data.result)
                     list.map(function(item) {
-                        var time = convertToTimeStamp(item.story.created_at);
+                        var time = convertToTimeStamp(item.created_at);
                         $('#list-storys').append(
                             `
-                            <tr class="tr-shadow py-3">
+                         <tr class="tr-shadow py-3">
                                         <td>
                                             <label class="au-checkbox">
-                                                <input type="checkbox" name="idp" value="${item.story.id}">
+                                                <input type="checkbox" name="idp" value="${item.id}">
                                                 <span class="au-checkmark"></span>
                                             </label>
                                         </td>
-                                        <td>${item.story.name}</td>
+                                        <td>${item.title}</td>
                                         <td>
-
-
-                                            <img src="${item.imgs[0].img}"
-                                                style="height: 40px">
-
+                                            <img src="${item.thumImg ?? '/a.jpg'}"
+                                                style="height: 45px;width:60px;">
                                         </td>
-
-                                        <td>${time}</td>
                                         <td>
-                                            <span class="status--process">${item.story.quanlity}</span>
+                                           ${item.category.title}
                                         </td>
-                                        <td>$${item.story.price}</td>
+                                        <td>${item.created_at}</td>
+
                                         <td>
                                             <div class="table-data-feature">
-
                                                 <button class="item" data-toggle="modal"
-                                                    data-target="#edit${item.story.id}">
+                                                    data-target="#edit${item.id}">
                                                     <i class="zmdi zmdi-edit"></i>
                                                 </button>
-
-
                                                 <button class="item" data-placement="top"
-                                                    id="btn-del-item${item.story.id}"
-                                                    onclick="deleteItem(${item.story.id})" title="Delete">
+                                                    id="btn-del-item${item.id}"
+                                                    onclick="deleteItem(${item.id})" title="Delete">
                                                     <i class="zmdi zmdi-delete"></i>
                                                 </button>
-
                                             </div>
                                         </td>
-
-                            </tr>
+                                    </tr>
                             `
                         );
                     })

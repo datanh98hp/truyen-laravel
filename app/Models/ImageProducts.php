@@ -11,7 +11,7 @@ class ImageProducts extends Model
     use HasFactory;
     protected $table = 'products_img';
     protected $fillable = [
-        'products_id',
+        'product_id',
         'slug',
         'tag',
         'img'
@@ -19,6 +19,6 @@ class ImageProducts extends Model
     protected $guarded = [];
     public function product() 
     {
-        return $this->belongsTo(Products::class,'id','products_id');
+        return $this->belongsTo(Products::class,'id','product_id');
     }
 }

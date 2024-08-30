@@ -98,13 +98,13 @@ class ProductController extends Controller
 
         foreach ($request->file('img') as $image) {
 
-            $file = $request->file('img');
+            $file = $image;
             $fileName = $file->getClientOriginalName();
             $file->move(public_path('uploads/product'), $fileName);
             $url = asset('uploads/product/' . $fileName);
 
             ImageProducts::create([
-                'products_id' => $new->id,
+                'product_id' => $new->id,
                 'slug' => $new->slug,
                 'tag' => $new->tag,
                 'img' => $url
@@ -312,10 +312,14 @@ class ProductController extends Controller
 
         if ($request->hasFile('inputFile')) {
 
-            $path = $request->file('inputFile')->store('productImages');
-
+          
+            $file = $request->file('inputFile');
+            $fileName = $file->getClientOriginalName();
+            $file->move(public_path('uploads/productImages'), $fileName);
+            $path = asset('uploads/productImages/' . $fileName);
+            
             ImageProducts::create([
-                'products_id' => $product_id,
+                'product_id' => $product_id,
                 'slug' => empty($request->slug) ? "No slug" : $request->slug,
                 'tag' => empty($request->tag) ? "No tag" : $request->tag,
                 'img' => $path

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categories;
 use App\Models\Chapter;
 use App\Models\Story;
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 
 class StoryController extends Controller
@@ -71,7 +72,7 @@ class StoryController extends Controller
 
 
         return response()->json(['result' => $stories]);
-        //return response()->json(['result'=>$request->all()]);
+       
     }
 
     public function filterByTime(Request $request)
@@ -158,6 +159,61 @@ class StoryController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $request->validate([
+            'title' => 'required|max:50',
+            // 'thumImg' => 'required',
+            'category_id' => 'required',
+        ]);
+        $story = Story::find($id);
+        // 
+        if ($request->hasFile('thumImg')) {
+            $file = $request->file('thumImg');
+            $fileName = $file->getClientOriginalName();
+            $file->move(public_path('uploads/story'), $fileName);
+            $url = asset('uploads/story/' . $fileName);
+
+           
+            $story->update([
+                'title' => $request->title,
+                'thumImg' => $url,
+                'category_id' => $request->category_id,
+                'slug' => $request->slug,
+                'tag' => $request->tag,
+                'des' => $request->des
+            ]);
+        }else{
+            $story->update([
+                'title' => $request->title,
+                'category_id' => $request->category_id,
+                'slug' => $request->slug,
+                'tag' => $request->tag,
+                'des' => $request->des
+            ]);
+        }
+       
+        //  
+        
+        return redirect()->back()->with('status', 'Story was updated !');
+    }
+
+    public function multiDdel(Request $request)
+    {
+
+        $arrId = $request->arrId;
+
+        // remove img
+        $list = Story::whereIn('id', $arrId)->get();
+
+        foreach ($list as $item) {
+            if (File::exists($item->thumImg)) {
+                File::delete($item->thumImg);
+            }
+        }
+
+        Story::whereIn('id', $arrId)->delete();
+
+        return response()->json(['result' => $request->all()]);
+        //return  $list;
     }
 
     /**

@@ -384,18 +384,18 @@
                                                         <label for="title" class=" form-control-label">Title</label>
                                                     </div>
                                                     <div class="col-md-9 col-12">
-                                                        <input type="text" id="name_update" name="name"
-                                                            value="{{ $story->title }}" placeholder="Name"
+                                                        <input type="text" id="name_update" name="title"
+                                                            value="{{ $story->title }}" placeholder="Title"
                                                             class="form-control">
                                                     </div>
 
                                                 </div>
                                                 <div class="row my-2">
                                                     <div class="col-md-3 col-12">
-                                                        <label for="title" class=" form-control-label">Thumb Image</label>
+                                                        <label for="thumb_update" class=" form-control-label">Thumb Image</label>
                                                     </div>
                                                     <div class="col-md-9 col-12">
-                                                        <input type="file" id="img_update" name="img"
+                                                        <input type="file" id="thumb_update" name="thumImg"
                                                             class="form-control" value="{{ $story->thumImg }}">
                                                     </div>
                                                 </div>
@@ -493,9 +493,9 @@
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="nav-chapter{{ $story->id }}" role="tabpanel" aria-labelledby="nav-contact-tab">
-                                           
+
                                             <a class="au-btn au-btn-icon au-btn--green au-btn--small my-4" target="_blank" href="{{ route('story.chapter.create', $story->id) }}">New chapter</a>
-                                        
+
                                             <div class="d-flex justify-content-between">
                                                 <div class="table-responsive table-responsive-data2">
                                                     <table class="table table-data2 display" id="chaptersTb">
@@ -509,18 +509,21 @@
                                                         <tbody id="list-storys">
                                                             @foreach ($story->chapters as $chapter)
                                                                 <tr class="tr-shadow py-3">
-                                                                    
+
                                                                     <td>{{ $chapter->title }}</td>
 
                                                                     <td>{{ $chapter->created_at }}</td>
 
                                                                     <td>
                                                                         <div class="table-data-feature">
-                                                                            <a target="_blank" class="item" href="/chapter/edit/{{ $story->id }}">
+                                                                            <a target="_blank" class="item" href="/chapter/edit/{{ $chapter->id }}">
                                                                                 <i class="zmdi zmdi-edit"></i>
                                                                             </a>
-                                                                            <button class="item" data-placement="top" id="btn-del-item{{ $story->id }}"
-                                                                                onclick="deleteItem({{ $story->id }})" title="Delete">
+
+                                                                            <button class="item"
+
+                                                                            data-placement="top" id="btn-del-item-chapter{{ $chapter->id }}"
+                                                                                onclick="deleteItemChapter({{ $chapter->id }})" title="Delete">
                                                                                 <i class="zmdi zmdi-delete"></i>
                                                                             </button>
 
@@ -539,7 +542,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-dismiss="modal">Cancel</button>
-                                        <button type="button" class="btn btn-primary"
+                                        <button type="submit" class="btn btn-primary"
                                             onclick="submitUpdate({{ $story->id }})">Confirm</button>
                                     </div>
                                 </div>
@@ -813,7 +816,7 @@
 
             $.ajax({
                 method: "POST",
-                url: "{{ url('multi-del-storys') }}",
+                url: "{{ url('multi-del-story') }}",
                 data: {
                     arrId
                 },
@@ -860,6 +863,35 @@
 
         }
 
+        // 
+        function deleteItemChapter(id) {
+
+                if (confirm('Do you want to remove this item ?') == true) {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+                        method: "DELETE",
+                        url: "del-chapter/" + id,
+                        // data: {
+                        //     id
+                        // },
+                        dataType: 'text',
+                        success: function (result) {
+                            console.log("a", result);
+                            $('#btn-del-item-chapter' + id).parents('tr').remove();
+                            //alert('Remove is success !!');
+                        }
+                    });
+                } else {
+                    return;
+                }
+
+
+            }
         // 
         function submitUpdate(id) {
 
@@ -962,7 +994,6 @@
         }
 
         function filterDataByNumberDateAgo() {
-            //alert('iahdihd');
             //
             let day = $('#timeFilter').val();
             //alert(day)

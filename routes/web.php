@@ -146,12 +146,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/get-stories', [StoryController::class, 'getall'])->name('filter.story');
 
+    Route::post('/multi-del-story', [StoryController::class, 'multiDdel']);
+
     /// Chapter
 
     Route::get('/chapters/{story_id}', [ChapterController::class, 'create'])->name('story.chapter.create');
     Route::post('/chapter', [ChapterController::class, 'store'])->name('story.chapter.store');
 
-    Route::delete('del-chapter/{id}', [StoryController::class, 'destroy'])->name('story.chapter.delete');
+    Route::delete('del-chapter/{id}', [ChapterController::class, 'destroy'])->name('story.chapter.delete');
 
 
     // setting page 

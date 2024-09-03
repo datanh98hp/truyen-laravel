@@ -152,18 +152,16 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/chapters/{story_id}', [ChapterController::class, 'create'])->name('story.chapter.create');
     Route::post('/chapter', [ChapterController::class, 'store'])->name('story.chapter.store');
-
+    Route::get('/chapter/edit/{id}', [ChapterController::class, 'edit'])->name('story.chapter.edit');
+    Route::post('/chapter/update/{id}', [ChapterController::class, 'update'])->name('story.chapter.update');
     Route::delete('del-chapter/{id}', [ChapterController::class, 'destroy'])->name('story.chapter.delete');
 
 
     // setting page 
-
     Route::get('settings-banner', [SettingController::class, 'setting_banner']);
-
     Route::post('set-banner/{pos}', [SettingController::class, 'setBannerImg']);
     // Route::post('set-banner-left',[SettingController::class,'setBannerLeft']);
     // Route::post('set-banner-right',[SettingController::class,'setBannerRight']);
-
     Route::get('settings-inf', [SettingController::class, 'setting_inf']);
     Route::post('set-inf', [SettingController::class, 'setBasicInf']);
     Route::post('set-maketinginf', [SettingController::class, 'setMarketingInf']);

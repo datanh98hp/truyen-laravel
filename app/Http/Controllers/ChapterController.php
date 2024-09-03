@@ -62,6 +62,10 @@ class ChapterController extends Controller
     public function edit(string $id)
     {
         //
+        $chapter = Chapter::find($id);
+        return view('admin.story.chapter.edit_chapter',[
+            'chapter' => $chapter
+        ]);
     }
 
     /**
@@ -70,6 +74,19 @@ class ChapterController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $request->validate([
+            'title' => 'required|max:250',
+            'content' => 'required',
+            'story_id' => 'required',
+        ]);
+        $chapter = Chapter::find($id);
+
+        $chapter->update([
+            'title' => $request->title,
+            'content' => $request->content,
+            'story_id' => $request->story_id,
+        ]);
+        return redirect()->back()->with('status', 'Chapter was added !');
     }
 
     /**

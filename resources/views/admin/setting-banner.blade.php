@@ -5,7 +5,7 @@
             <div class="row p-3">
                 <div class="col-xl-6">
 
-                    {{-- <div class="card mh-100">
+                    <div class="card mh-100">
                         <form class="p-2">
                             <div class="card-body">
                                 <h4 class="card-title mb-3">Text header</h4>
@@ -25,7 +25,7 @@
                             </script>
                             </div>
                         </form>
-                    </div> --}}
+                    </div>
 
                     <div class="card mh-100">
                         <img class="card-img-top" style="height: 335px" src="{{ asset($setting->banner) }}"

@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
         View::share('categories', $categories);
         $settings = Setting::all()->first();
         View::share('setting', $settings);
-        ///
+        // /
         // cart
         $totalcart = 0;
         $totalQuantity = 0;

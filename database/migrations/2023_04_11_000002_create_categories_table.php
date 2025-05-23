@@ -20,7 +20,14 @@ return new class extends Migration
 
             $table->timestamps();
         });
+
+        DB::table('categories')->insert([
+            'title' => 'initial', 
+            'img' => 'https://cdn.dribbble.com/userupload/43423073/file/original-167c772b052b15ca80a6c8ac8fc598a9.jpg?resize=1600x1200&vertical=center'
+        ]);
     }
+
+
 
     /**
      * Reverse the migrations.

@@ -239,7 +239,7 @@
                             </div>
                         </div>
                     </div>
-                    <a class="hero__item set-bg" href="#" data-setbg="{{$setting->banner}}">
+                    <a class="hero__item set-bg" href="#" data-setbg="https://cdn.dribbble.com/userupload/42078441/file/original-eb3316b4bdd8b0c19b84ca6d39d0903a.png?resize=831x623">
                         <div class="hero__text">
                             {{-- {!! $setting->banner_text !!} --}}
                             {{-- <span>FRUIT FRESH</span>

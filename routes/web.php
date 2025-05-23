@@ -68,22 +68,22 @@ Route::middleware(['auth', 'admin'])->group(function () {
     // 
     //products
 
-    Route::get('/products', [ProductController::class, 'index']);
-    Route::post('/products', [ProductController::class, 'store'])->name('create.product');
-    Route::post('/multi-del-products', [ProductController::class, 'multiDdel']);
-    Route::post('products/{id}', [ProductController::class, 'update'])->name('update.product');
-    Route::post('/del-product/{id}', [ProductController::class, 'destroy']);
+    // Route::get('/products', [ProductController::class, 'index']);
+    // Route::post('/products', [ProductController::class, 'store'])->name('create.product');
+    // Route::post('/multi-del-products', [ProductController::class, 'multiDdel']);
+    // Route::post('products/{id}', [ProductController::class, 'update'])->name('update.product');
+    // Route::post('/del-product/{id}', [ProductController::class, 'destroy']);
 
 
 
     /// order list
 
 
-    Route::get('/order-list', [OrderController::class, 'index']);
+    // Route::get('/order-list', [OrderController::class, 'index']);
 
-    Route::post('/order-by-status', [OrderController::class, 'filterByStatus'])->name('filter.order.status');
+    // Route::post('/order-by-status', [OrderController::class, 'filterByStatus'])->name('filter.order.status');
 
-    Route::get('/order-by-rangedate', [OrderController::class, 'filterByStatus']);
+    // Route::get('/order-by-rangedate', [OrderController::class, 'filterByStatus']);
 
 
     //for ajax
@@ -99,31 +99,31 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/del-image/{img_id}', [ProductController::class, 'delImg'])->name('del.image_product');
 
 
-    /// old cart
+    // /// old cart
     Route::get('cart', [CartController::class, 'cartList'])->name('cart.list');
     Route::post('cart', [CartController::class, 'addToCart'])->name('cart.store');
     Route::post('cart_ajax', [CartController::class, 'addToCartAjax'])->name('cart.store.ajax');
 
 
-    Route::post('update-cart', [CartController::class, 'updateItemCart'])->name('cart.update');
+    // Route::post('update-cart', [CartController::class, 'updateItemCart'])->name('cart.update');
 
-    Route::post('remove', [CartController::class, 'removeCart'])->name('cart.remove');
-    Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
+    // Route::post('remove', [CartController::class, 'removeCart'])->name('cart.remove');
+    // Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
 
-    Route::post('checkout', [CartController::class, 'checkout'])->name('cart.checkout.ajax');
+    // Route::post('checkout', [CartController::class, 'checkout'])->name('cart.checkout.ajax');
 
-    Route::post('/pay', [CartController::class, 'pay']);
-    Route::post('/onepay_payment', [CartController::class, 'onepay_payment']);
-    //
-    Route::post('/vnpay_payment', [CartController::class, 'vnpay_payment']);
+    // Route::post('/pay', [CartController::class, 'pay']);
+    // Route::post('/onepay_payment', [CartController::class, 'onepay_payment']);
+    // //
+    // Route::post('/vnpay_payment', [CartController::class, 'vnpay_payment']);
 
 
-    Route::get('/payment-status', [CartController::class, 'payment_status']);
+    // Route::get('/payment-status', [CartController::class, 'payment_status']);
 
 
     //new cart
 
-    Route::get('shop-cart', [ShopCartController::class, 'index'])->name('shop-cart');
+    // Route::get('shop-cart', [ShopCartController::class, 'index'])->name('shop-cart');
 
 
     ///
